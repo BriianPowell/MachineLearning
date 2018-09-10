@@ -10,49 +10,84 @@ def sign(x):
 #-------------- Implement your code Below -------------#
 
 def show_images(data):
-	'''
-	This function is used for plot image and save it.
+    '''
+    This function is used for plot image and save it.
 
-	Args:
-	data: Two images from train data with shape (2, 16, 16). The shape represents total 2
-	      images and each image has size 16 by 16. 
+    Args:
+    data: Two images from train data with shape (2, 16, 16). The shape represents total 2
+          images and each image has size 16 by 16. 
 
-	Returns:
-		Do not return any arguments, just save the images you plot for your report.
-	'''
-
-
+    Returns:
+    	Do not return any arguments, just save the images you plot for your report.
+    '''
+    
+    firstData = data[0]
+    secondData = data[1]
+    plt.imshow(firstData, cmap = 'gray')
+    plt.savefig('firstData')
+    plt.show()
+    plt.imshow(secondData, cmap = 'gray')
+    plt.savefig('secondData')
+    plt.show()
+    
+    
 def show_features(data, label):
-	'''
-	This function is used for plot a 2-D scatter plot of the features and save it. 
-
-	Args:
-	data: train features with shape (1561, 2). The shape represents total 1561 samples and 
-	      each sample has 2 features.
-	label: train data's label with shape (1561,1). 
-		   1 for digit number 1 and -1 for digit number 5.
-	
-	Returns:
-	Do not return any arguments, just save the 2-D scatter plot of the features you plot for your report.
-	'''
-
+    '''
+    This function is used for plot a 2-D scatter plot of the features and save it. 
+    
+    Args:
+    data: train features with shape (1561, 2). The shape represents total 1561 samples and 
+          each sample has 2 features.
+    label: train data's label with shape (1561,1). 
+    	   1 for digit number 1 and -1 for digit number 5.
+    	
+    Returns:
+    Do not return any arguments, just save the 2-D scatter plot of the features you plot for your report.
+    '''
+    
+    feature1X = []
+    feature1Y = []
+    feature5X = []
+    feature5Y = []
+    
+    for x in range(0,len(data)):
+        if label[x] == 1:
+            feature1X.append(data[x][0])
+            feature1Y.append(data[x][1])
+        else:
+            feature5X.append(data[x][0])
+            feature5Y.append(data[x][1])
+    
+    plt.scatter(feature1X,feature1Y,marker= '*',color='red')
+    #plt.scatter(feature1X,feature1Y)
+    plt.scatter(feature5X,feature5Y,marker= '+', color = 'blue')
+    plt.savefig('ScatterPlot')
+    plt.show()
+    
+    
+    
 
 def perceptron(data, label, max_iter, learning_rate):
-	'''
-	The perceptron classifier function.
+    '''
+    The perceptron classifier function.
+    
+    Args:
+    data: train data with shape (1561, 3), which means 1561 samples and 
+    		 each sample has 3 features.(1, symmetry, average internsity)
+    label: train data's label with shape (1561,1). 
+    	   1 for digit number 1 and -1 for digit number 5.
+    max_iter: max iteration numbers
+    learning_rate: learning rate for weight update
+    	
+    Returns:
+    	w: the seperater with shape (1, 3). You must initilize it with w = np.zeros((1,d))
+    '''
+    print(data)
+    print(label)
+    
+    
 
-	Args:
-	data: train data with shape (1561, 3), which means 1561 samples and 
-		  each sample has 3 features.(1, symmetry, average internsity)
-	label: train data's label with shape (1561,1). 
-		   1 for digit number 1 and -1 for digit number 5.
-	max_iter: max iteration numbers
-	learning_rate: learning rate for weight update
-	
-	Returns:
-		w: the seperater with shape (1, 3). You must initilize it with w = np.zeros((1,d))
-	'''
-
+    
 
 def show_result(data, label, w):
 	'''
