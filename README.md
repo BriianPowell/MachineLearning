@@ -1,8 +1,8 @@
 # Machine_Learning
 Repository for CECS 456 at LBSU
-####Professor: 
+#### Professor: 
 Wenlu Zhang
 
-####Group Members: 
-Justin Concepcion
-Brian Powell
+#### Group Members: 
+Justin Concepcion _@justinconcepcion_
+Brian Powell _@BriianPowell_
