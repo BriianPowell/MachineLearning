@@ -4,7 +4,7 @@ from solution import *
 
 def play_with_data():
 	# show the data
-	traindataloc = "../data/train.txt"
+	traindataloc = "C:/Users/bapow/Documents/MyBranch/Machine_Learning/Homework_1/A1/data/train.txt"
 	nums = 2
 	data = load_data(traindataloc)[0:nums,1:]
 	[n,d]=data.shape
@@ -16,7 +16,7 @@ def play_with_data():
 
 def play_with_features():
 	#get data
-	traindataloc,testdataloc = "../data/train.txt", "C:/Users/bapow/OneDrive/Repository/CSULB/LastSem/456/Homework_1/HW1/A1/data/test.txt"
+	traindataloc,testdataloc = "C:/Users/bapow/Documents/MyBranch/Machine_Learning/Homework_1/A1/data/train.txt", "C:/Users/bapow/Documents/MyBranch/Machine_Learning/Homework_1/A1/data/test.txt"
 	train_data,train_label = load_features(traindataloc)
 	test_data, test_label = load_features(testdataloc)
 	show_features(train_data[:,1:3],train_label)
@@ -38,7 +38,7 @@ def test_accuracy():
 
 
 def play_with_result():
-	traindataloc,testdataloc = "../data/train.txt", "C:/Users/bapow/OneDrive/Repository/CSULB/LastSem/456/Homework_1/HW1/A1/data/test.txt"
+	traindataloc,testdataloc = "C:/Users/bapow/Documents/MyBranch/Machine_Learning/Homework_1/A1/data/train.txt", "C:/Users/bapow/Documents/MyBranch/Machine_Learning/Homework_1/A1/data/test.txt"
 	train_data,train_label = load_features(traindataloc)
 	test_data, test_label = load_features(testdataloc)
 	max_iter = 10
