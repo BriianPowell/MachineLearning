@@ -2,11 +2,12 @@ import numpy as np
 from helper import *
 
 '''
-Homework1: perceptron classifier
-Turn in:
-Code .txt or .rtf
-report .pdf or .doc/.docx
+Brian Powell 012362894
+CECS 456 - Wenlu Zhang
+Homework #1
+Perceptron Classifier
 '''
+
 def sign(x):
 	return 1 if x > 0 else -1
 
@@ -46,23 +47,22 @@ def show_features(data, label):
     Returns:
     Do not return any arguments, just save the 2-D scatter plot of the features you plot for your report.
     '''
+    oneX = []
+    oneY = []
+    fiveX = []
+    fiveY = []
     
-    feature1X = []
-    feature1Y = []
-    feature5X = []
-    feature5Y = []
-    
-    for x in range(0,len(data)):
+    for x in range(len(data)):
         if label[x] == 1:
-            feature1X.append(data[x][0])
-            feature1Y.append(data[x][1])
+            oneX.append(data[x][0])
+            oneY.append(data[x][1])
         else:
-            feature5X.append(data[x][0])
-            feature5Y.append(data[x][1])
+            fiveX.append(data[x][0])
+            fiveY.append(data[x][1])
     
-    plt.scatter(feature1X,feature1Y,marker='*',color='red')
-    plt.scatter(feature5X,feature5Y,marker='+',color='blue')
-    plt.savefig('ScatterPlot')
+    plt.scatter(oneX,oneY,marker='*',color='red')
+    plt.scatter(fiveX,fiveY,marker='+',color='blue')
+    plt.savefig('featureScatter')
     plt.show()
     
     
@@ -83,15 +83,17 @@ def perceptron(data, label, max_iter, learning_rate):
     '''
     w = np.zeros((1,3))
 
-    for max_iters in range(max_iter):
-        for i, x in enumerate(data):
-            if (sign(np.dot(data[i],np.transpose(w)))):
-                w = w + data[i,2]*data[i,1]*learning_rate
+    for i in range(len(data)): 
+        s = sum(np.dot(data[i],np.transpose(w)))
+        h = sign(s)
+        if(label[i]!=h):
+            w = w + data[i]*label[i]*learning_rate
 
     return w
 
+
 def show_result(data, label, w):
-	'''
+    '''
 	This function is used for plot the test data with the separators and save it.
 	
 	Args:
@@ -102,9 +104,25 @@ def show_result(data, label, w):
 	
 	Returns:
 	Do not return any arguments, just save the image you plot for your report.
-	'''
+    '''
+    for i in range(len(data)):
+        if(label[i] == 1):
+            plt.scatter(data[i][0],data[i][1],marker='*',c='red')
+        else:
+            plt.scatter(data[i][0],data[i][1],marker='+',c='blue')
+    plt.xlabel('Symmetry')
+    plt.ylabel('Average Intensity')
 
+    weight = w[0]
+    x = np.linspace(np.amin(data[:,:1]),np.amax(data[:,:1]))
+    slope = -(weight[0]/weight[2])/(weight[0]/weight[1])
+    intercept = -weight[0]/weight[2]
+    y = [(slope*i)+intercept for i in x]
 
+    plt.plot(x, y, c="black")
+    plt.savefig("resultScatter")
+    plt.show()
+    
 #-------------- Implement your code above ------------#
 def accuracy_perceptron(data, label, w):
 	n, _ = data.shape
