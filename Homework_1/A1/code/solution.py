@@ -82,12 +82,11 @@ def perceptron(data, label, max_iter, learning_rate):
     	w: the seperater with shape (1, 3). You must initilize it with w = np.zeros((1,d))
     '''
     w = np.zeros((1,3))
-    
+
     for max_iters in range(max_iter):
-        error_count = 0
         for i, x in enumerate(data):
-            if (np.dot(np.transpose(w) ,data[i])*label[i]) <= 0:
-                w = w + learning_rate * data[i] * label[i]
+            if (sign(np.dot(data[i],np.transpose(w)))):
+                w = w + data[i,2]*data[i,1]*learning_rate
 
     return w
 
@@ -118,7 +117,7 @@ def accuracy_perceptron(data, label, w):
 
 def test_perceptron(max_iter, learning_rate):
 	#get data
-	traindataloc,testdataloc = "C:/Users/bapow/Documents/MyBranch/Machine_Learning/Homework_1/A1/data/train.txt", "C:/Users/bapow/Documents/MyBranch/Machine_Learning/Homework_1/A1/data/test.txt"
+	traindataloc,testdataloc = "F:\\Brian\\My Documents\\MyBranch\\Machine_Learning\\Homework_1\\A1\\data\\train.txt", "F:\\Brian\\My Documents\\MyBranch\Machine_Learning\\Homework_1\\A1\\data\\test.txt"
 	train_data,train_label = load_features(traindataloc)
 	test_data, test_label = load_features(testdataloc)
 	#train perceptron
