@@ -1,7 +1,8 @@
-from matplotlib import pyplot as plt
-import numpy as np 
 import math
 import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib import pyplot as plt
+
 
 def load_data(dataloc):
 	data = np.loadtxt(dataloc, unpack='true')
@@ -32,5 +33,3 @@ def load_features(dataloc):
 
 def equal(x, y):
 	return True if abs(x-y) < 0.001 else False
-
-

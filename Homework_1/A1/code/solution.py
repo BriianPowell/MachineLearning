@@ -3,6 +3,9 @@ from helper import *
 
 '''
 Homework1: perceptron classifier
+Turn in:
+Code .txt or .rtf
+report .pdf or .doc/.docx
 '''
 def sign(x):
 	return 1 if x > 0 else -1
@@ -20,14 +23,13 @@ def show_images(data):
     Returns:
     	Do not return any arguments, just save the images you plot for your report.
     '''
-    
-    firstData = data[0]
-    secondData = data[1]
-    plt.imshow(firstData, cmap = 'gray')
-    plt.savefig('firstData')
+    first = data[0]
+    second = data[1]
+    plt.imshow(first, cmap = 'gray')
+    plt.savefig('5plot')
     plt.show()
-    plt.imshow(secondData, cmap = 'gray')
-    plt.savefig('secondData')
+    plt.imshow(second, cmap = 'gray')
+    plt.savefig('1plot')
     plt.show()
     
     
@@ -58,15 +60,12 @@ def show_features(data, label):
             feature5X.append(data[x][0])
             feature5Y.append(data[x][1])
     
-    plt.scatter(feature1X,feature1Y,marker= '*',color='red')
-    #plt.scatter(feature1X,feature1Y)
-    plt.scatter(feature5X,feature5Y,marker= '+', color = 'blue')
+    plt.scatter(feature1X,feature1Y,marker='*',color='red')
+    plt.scatter(feature5X,feature5Y,marker='+',color='blue')
     plt.savefig('ScatterPlot')
     plt.show()
     
     
-    
-
 def perceptron(data, label, max_iter, learning_rate):
     '''
     The perceptron classifier function.
@@ -82,12 +81,15 @@ def perceptron(data, label, max_iter, learning_rate):
     Returns:
     	w: the seperater with shape (1, 3). You must initilize it with w = np.zeros((1,d))
     '''
-    print(data)
-    print(label)
+    w = np.zeros((1,3))
     
-    
+    for max_iters in range(max_iter):
+        error_count = 0
+        for i, x in enumerate(data):
+            if (np.dot(np.transpose(w) ,data[i])*label[i]) <= 0:
+                w = w + learning_rate * data[i] * label[i]
 
-    
+    return w
 
 def show_result(data, label, w):
 	'''
@@ -116,7 +118,7 @@ def accuracy_perceptron(data, label, w):
 
 def test_perceptron(max_iter, learning_rate):
 	#get data
-	traindataloc,testdataloc = "../data/train.txt", "../data/test.txt"
+	traindataloc,testdataloc = "C:/Users/bapow/Documents/MyBranch/Machine_Learning/Homework_1/A1/data/train.txt", "C:/Users/bapow/Documents/MyBranch/Machine_Learning/Homework_1/A1/data/test.txt"
 	train_data,train_label = load_features(traindataloc)
 	test_data, test_label = load_features(testdataloc)
 	#train perceptron
