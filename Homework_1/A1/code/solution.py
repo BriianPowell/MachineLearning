@@ -135,7 +135,7 @@ def accuracy_perceptron(data, label, w):
 
 def test_perceptron(max_iter, learning_rate):
 	#get data
-	traindataloc,testdataloc = "C:/Users/bapow/Documents/MyBranch/Machine_Learning/Homework_1/A1/data/train.txt", "C:/Users/bapow/Documents/MyBranch/Machine_Learning/Homework_1/A1/data/test.txt"
+	traindataloc,testdataloc = "F:\\Brian\\My Documents\\MyBranch\\Machine_Learning\\Homework_1\\A1\\data\\train.txt", "F:\\Brian\\My Documents\\MyBranch\Machine_Learning\\Homework_1\\A1\\data\\test.txt"
 	train_data,train_label = load_features(traindataloc)
 	test_data, test_label = load_features(testdataloc)
 	#train perceptron
