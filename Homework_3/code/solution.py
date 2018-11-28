@@ -6,6 +6,7 @@ Author: Brian Powell 012362894
 Professor: Wenlu Zhang
 Class: CECS 456 - Machine Learning
 '''
+
 def logistic_regression(data, label, max_iter, learning_rate):
 	'''
 	The logistic regression classifier function.
@@ -21,19 +22,15 @@ def logistic_regression(data, label, max_iter, learning_rate):
 	Returns:
 		w: the seperater with shape (3, 1). You must initilize it with w = np.zeros((d,1))
 	'''
-	w = np.zeros(data.shape[1])
-	N = len(data)
-	
+	n, d = data.shape
+	w = np.zeros((d,1))
+
 	for i in range(max_iter):
-		for x in range(len(w)):
-			sigVal = 0
-			for row in range(N):
-				numerator = label[row] * data[row, x]
-				sigVal += sigmoid(-w[x] * data[row, x] * label[x]) * numerator
-			if(sigVal>=0.5): #non linear function to linear classification
-				#compute gradient
-				gradient = -sigVal/N
-				w[x] = w[x] - (learning_rate * gradient)
+		gt = np.zeros((d,1))
+		for j in range(n):
+			gt = gt + gradient(np.transpose(data[j,:]), label[j], w)
+		w = w - 1/n * learning_rate*gt
+	print("W:", w)
 	return w					
 
 
@@ -52,25 +49,14 @@ def thirdorder(data):
 		The first dimension represents total samples (training: 1561; testing: 424) 
 		and the second dimesion represents total features.
 	'''
-	#features
-	N = len(data.T)
+	n, _ = data.shape
+	result = []
 
-	#create a vector to append high order features incrementally
-	product = np.ones((data.shape[0],1))
-
-	#Second Order
-	for new_feat in range(N+1):
-		for col in range(N+1):
-			product[:,0] = data[:, new_feat] * data[:,col]
-			data = np.hstack((data, product))
-
-	#Third Order
-	for new_feat in range(N+1):
-		for col in range(N+1):
-			product[:,0] = data[:, new_feat] * data[:, new_feat] * data[:, col]
-			data = np.hstack((data, product))
-
-	return data
+	for i in range(n):
+		x1, x2 = data[i,0], data[i,1]
+		order3 = [1, x1, x2, x1**2, x1*x2, x2**2, x1**3, x1**2*x2, x1*x2**2, x2**3]
+		result.append(order3)
+	return np.array(result)
 
 
 def accuracy(x, y, w):
@@ -90,15 +76,22 @@ def accuracy(x, y, w):
     '''
     n, _ = x.shape
     miss = 0
+
     for i in range(n):
-        sigVal = sigmoid(np.dot(x[i,:],np.transpose(w)))
-        if((sigVal >= 0.5 and y[i] == -1) or (sigVal < 0.5 and y[i] == 1)):
-            miss += 1
+        if lrclassifier(np.dot(np.transpose(w), np.transpose(x[i,:]))) != y[i]:
+			miss += 1
     return (n-miss)/n
 
 
 def sigmoid(likelihood):
 	return 1 / (1+np.exp(-likelihood))
+
+def lrclassifier(x):
+	return 1 if 1.0/(1+np.exp(-x))>0.5 else -1
+
+def gradient(x, y, w):
+	result = -y*x/(1+np.exp(y*np.do(np.tranpose(w),x)))
+	return result[:, np.newaxis]
 
 '''
 D)
