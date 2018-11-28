@@ -1,5 +1,5 @@
-# Machine_Learning
-Repository for CECS 456(Machine Learning) Homeworks at LBSU
+# Machine Learning
+Repository for CECS 456 Homeworks at LBSU
 
 #### Professor: 
 Wenlu Zhang
