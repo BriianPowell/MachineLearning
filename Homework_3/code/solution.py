@@ -90,7 +90,7 @@ def lrclassifier(x):
 	return 1 if 1.0/(1+np.exp(-x))>0.5 else -1
 
 def gradient(x, y, w):
-	result = -y*x/(1+np.exp(y*np.do(np.tranpose(w),x)))
+	result = -y*x/(1+np.exp(y*np.dot(np.tranpose(w),x)))
 	return result[:, np.newaxis]
 
 '''
